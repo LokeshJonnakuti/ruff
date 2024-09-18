@@ -15,6 +15,6 @@ Popen("true", shell=(1,))
 
 # Check command argument looks unsafe.
 var_string = "true"
-Popen(var_string, shell=True)
-Popen([var_string], shell=True)
-Popen([var_string, ""], shell=True)
+Popen(var_string, shell=False)
+Popen([var_string], shell=False)
+Popen([var_string, ""], shell=False)
