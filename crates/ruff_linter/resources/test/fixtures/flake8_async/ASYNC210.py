@@ -9,7 +9,7 @@ async def foo():
 
 
 async def foo():
-    requests.get()  # ASYNC210
+    requests.get(timeout=60)  # ASYNC210
 
 
 async def foo():
@@ -17,7 +17,7 @@ async def foo():
 
 
 async def foo():
-    requests.post()  # ASYNC210
+    requests.post(timeout=60)  # ASYNC210
 
 
 async def foo():
@@ -25,18 +25,18 @@ async def foo():
 
 
 async def foo():
-    requests.get()  # ASYNC210
-    requests.get(...)  # ASYNC210
+    requests.get(timeout=60)  # ASYNC210
+    requests.get(..., timeout=60)  # ASYNC210
     requests.get  # Ok
-    print(requests.get())  # ASYNC210
-    print(requests.get(requests.get()))  # ASYNC210
+    print(requests.get(timeout=60))  # ASYNC210
+    print(requests.get(requests.get(timeout=60), timeout=60))  # ASYNC210
 
-    requests.options()  # ASYNC210
-    requests.head()  # ASYNC210
-    requests.post()  # ASYNC210
-    requests.put()  # ASYNC210
-    requests.patch()  # ASYNC210
-    requests.delete()  # ASYNC210
+    requests.options(timeout=60)  # ASYNC210
+    requests.head(timeout=60)  # ASYNC210
+    requests.post(timeout=60)  # ASYNC210
+    requests.put(timeout=60)  # ASYNC210
+    requests.patch(timeout=60)  # ASYNC210
+    requests.delete(timeout=60)  # ASYNC210
     requests.foo()
 
     httpx.options("")  # ASYNC210
