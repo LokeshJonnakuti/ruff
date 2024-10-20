@@ -1,6 +1,7 @@
 import os
 import sys
 import sysconfig
+from security import safe_command
 
 
 def find_ruff_bin() -> str:
@@ -41,7 +42,7 @@ if __name__ == "__main__":
     if sys.platform == "win32":
         import subprocess
 
-        completed_process = subprocess.run([ruff, *sys.argv[1:]])
+        completed_process = safe_command.run(subprocess.run, [ruff, *sys.argv[1:]])
         sys.exit(completed_process.returncode)
     else:
         os.execvp(ruff, [ruff, *sys.argv[1:]])

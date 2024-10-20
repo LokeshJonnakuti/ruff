@@ -1,11 +1,12 @@
 from subprocess import run
 import subprocess
+from security import safe_command
 
 output = run(["foo"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 output = subprocess.run(["foo"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-output = subprocess.run(stdout=subprocess.PIPE, args=["foo"],  stderr=subprocess.PIPE)
+output = safe_command.run(subprocess.run, stdout=subprocess.PIPE, args=["foo"],  stderr=subprocess.PIPE)
 
 output = subprocess.run(
     ["foo"], stdout=subprocess.PIPE, check=True, stderr=subprocess.PIPE

@@ -30,6 +30,7 @@ from pysource_codegen import generate as generate_random_code
 from pysource_minimize import minimize as minimize_repro
 from rich_argparse import RawDescriptionRichHelpFormatter
 from termcolor import colored
+from security import safe_command
 
 MinimizedSourceCode = NewType("MinimizedSourceCode", str)
 Seed = NewType("Seed", int)
@@ -38,8 +39,7 @@ ExitCode = NewType("ExitCode", int)
 
 def contains_bug(code: str, *, ruff_executable: str) -> bool:
     """Return `True` if the code triggers a parser error."""
-    completed_process = subprocess.run(
-        [ruff_executable, "check", "--config", "lint.select=[]", "--no-cache", "-"],
+    completed_process = safe_command.run(subprocess.run, [ruff_executable, "check", "--config", "lint.select=[]", "--no-cache", "-"],
         capture_output=True,
         text=True,
         input=code,
@@ -266,8 +266,7 @@ def parse_args() -> ResolvedCliArgs:
                 "unless `--only-new-bugs` is also specified"
             )
         try:
-            subprocess.run(
-                [args.baseline_executable, "--version"], check=True, capture_output=True
+            safe_command.run(subprocess.run, [args.baseline_executable, "--version"], check=True, capture_output=True
             )
         except FileNotFoundError:
             parser.error(

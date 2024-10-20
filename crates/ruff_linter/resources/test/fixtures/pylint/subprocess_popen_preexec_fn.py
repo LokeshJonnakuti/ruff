@@ -1,4 +1,5 @@
 import subprocess
+from security import safe_command
 
 
 def foo():
@@ -6,13 +7,13 @@ def foo():
 
 
 # Errors.
-subprocess.Popen(preexec_fn=foo)
+safe_command.run(subprocess.Popen, preexec_fn=foo)
 subprocess.Popen(["ls"], preexec_fn=foo)
-subprocess.Popen(preexec_fn=lambda: print("Hello, world!"))
+safe_command.run(subprocess.Popen, preexec_fn=lambda: print("Hello, world!"))
 subprocess.Popen(["ls"], preexec_fn=lambda: print("Hello, world!"))
 
 # Non-errors.
-subprocess.Popen()
+safe_command.run(subprocess.Popen)
 subprocess.Popen(["ls"])
-subprocess.Popen(preexec_fn=None)  # None is the default.
+safe_command.run(subprocess.Popen, preexec_fn=None)  # None is the default.
 subprocess.Popen(["ls"], preexec_fn=None)  # None is the default.

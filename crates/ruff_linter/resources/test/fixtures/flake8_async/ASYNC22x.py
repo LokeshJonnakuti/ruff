@@ -1,5 +1,6 @@
 import os
 import subprocess
+from security import safe_command
 
 # Violation cases:
 
@@ -28,15 +29,15 @@ async def foo():
     await async_fun(
         subprocess.getoutput()  # ASYNC221
     )
-    subprocess.Popen()  # ASYNC220
+    safe_command.run(subprocess.Popen)  # ASYNC220
     os.system()  # ASYNC221
 
     system()
     os.system.anything()
     os.anything()
 
-    subprocess.run()  # ASYNC221
-    subprocess.call()  # ASYNC221
+    safe_command.run(subprocess.run)  # ASYNC221
+    safe_command.run(subprocess.call)  # ASYNC221
     subprocess.check_call()  # ASYNC221
     subprocess.check_output()  # ASYNC221
     subprocess.getoutput()  # ASYNC221

@@ -14,6 +14,7 @@ from subprocess import CalledProcessError
 from typing import NamedTuple
 
 from tqdm import tqdm
+from security import safe_command
 
 
 class Repository(NamedTuple):
@@ -58,8 +59,7 @@ def main() -> None:
             continue
 
         try:
-            output = subprocess.run(
-                [ruff, *ruff_args, "."],
+            output = safe_command.run(subprocess.run, [ruff, *ruff_args, "."],
                 cwd=project_dir,
                 capture_output=True,
                 text=True,
