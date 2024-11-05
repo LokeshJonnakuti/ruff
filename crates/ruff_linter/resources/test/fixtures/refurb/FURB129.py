@@ -87,5 +87,5 @@ with open("FURB129.py") as f:
         pass
     for _line in f.readlines(10):
         pass
-    for _not_line in f.readline():
+    for _not_line in f.readline(5_000_000):
         pass
