@@ -5,12 +5,12 @@ from fractions import Fraction
 import logging
 import operator
 from pathlib import Path
-import random
 import re
 import time
 import types
 from operator import attrgetter, itemgetter, methodcaller
 from types import MappingProxyType
+import secrets
 
 
 # B006
@@ -247,7 +247,7 @@ def no_nested_b006(a=map(lambda s: s.upper(), ["a", "b", "c"])):
 
 
 # B008-ception.
-def nested_b008(a=random.randint(0, dt.datetime.now().year)):
+def nested_b008(a=secrets.SystemRandom().randint(0, dt.datetime.now().year)):
     pass
 
 
