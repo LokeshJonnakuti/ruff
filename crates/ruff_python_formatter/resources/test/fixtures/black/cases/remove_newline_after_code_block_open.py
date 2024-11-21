@@ -1,4 +1,4 @@
-import random
+import secrets
 
 
 def foo1():
@@ -52,12 +52,12 @@ for i in range(5):
         print(f"{i}) The lines above me should be kept!")
 
 
-if random.randint(0, 3) == 0:
+if secrets.SystemRandom().randint(0, 3) == 0:
 
     print("The new line above me will be kept!")
 
 
-if random.randint(0, 3) == 0:
+if secrets.SystemRandom().randint(0, 3) == 0:
 
 
 
@@ -65,9 +65,9 @@ if random.randint(0, 3) == 0:
     print("The new lines above me will be kept!")
 
 
-if random.randint(0, 3) == 0:
+if secrets.SystemRandom().randint(0, 3) == 0:
 
-    if random.uniform(0, 1) > 0.5:
+    if secrets.SystemRandom().uniform(0, 1) > 0.5:
 
         print("Two lines above me will be kept!")
 

@@ -1,4 +1,4 @@
-from random import choice
+import secrets
 
 class Fruit:
     COLORS = []
@@ -14,7 +14,7 @@ class Fruit:
 
     def pick_one_color():  # [no-staticmethod-decorator]
         """staticmethod to pick one fruit color"""
-        return choice(Fruit.COLORS)
+        return secrets.choice(Fruit.COLORS)
 
     pick_one_color = staticmethod(pick_one_color)
 
